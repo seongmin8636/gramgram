@@ -1,11 +1,15 @@
 package com.ll.gramgram.boundedContext.home.controller;
 
+import com.ll.gramgram.boundedContext.member.entity.Member;
+import com.ll.gramgram.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 import java.util.Enumeration;
 
 @Controller
@@ -15,6 +19,7 @@ public class HomeController {
     public String showMain() {
         return "usr/home/main";
     }
+
     @GetMapping("/debugSession")
     @ResponseBody
     public String showDebugSession(HttpSession session) {
@@ -27,6 +32,6 @@ public class HomeController {
             sb.append(String.format("%s: %s\n", attributeName, attributeValue));
         }
 
-        return sb.toString();
+        return sb.toString().replaceAll("\n", "<br>");
     }
 }
